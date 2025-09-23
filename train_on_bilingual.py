@@ -1,4 +1,3 @@
-
 import numpy as np
 import torch
 import torch.nn as nn
@@ -24,8 +23,8 @@ def to_lines(text):
 	return sents
 
 
-MAX_PAIRS = 5000
-data = read_text('bilingual_pairs/fra.txt')
+MAX_PAIRS = 9000
+data = read_text('bilingual_pairs/fra edit.txt')
 lines = to_lines(data)[:MAX_PAIRS]
 src_sentences = [line[0].lower() for line in lines if len(line) > 1]
 tgt_sentences = [line[1].lower() for line in lines if len(line) > 1]
@@ -107,8 +106,8 @@ trainY_tensor = to_tensor(trainY)
 testX_tensor = to_tensor(testX)
 testY_tensor = to_tensor(testY)
 
-epochs = 30
-batch_size = 64
+epochs = 50
+batch_size = 128
 train_losses = []
 val_losses = []
 for epoch in range(epochs):
