@@ -4,7 +4,7 @@ L2LTranslator is a bilingual sequence-to-sequence translation project. It provid
 
 ## Directory Structure
 
-```
+```files
 main.py                  # Main entry point for running translation tasks
 requirements.txt         # Python dependencies
 train_notebook.ipynb     # Jupyter notebook for interactive training and analysis
@@ -23,6 +23,7 @@ savepoints/              # Model checkpoints and vocabulary files
 ## Getting Started
 
 1. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```

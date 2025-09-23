@@ -23,8 +23,6 @@ def to_lines(text):
 	sents = [i.split('\t') for i in sents]
 	return sents
 
-# Read source and target language pairs
-
 
 MAX_PAIRS = 5000
 data = read_text('bilingual_pairs/fra.txt')
@@ -70,7 +68,6 @@ print(f'Source max length: {src_length}, Target max length: {tgt_length}')
 def encode_sequences(sentences, vocab, length):
 	return np.array([encode_sentence(s, vocab, length) for s in sentences])
 
-# Train/test split
 train_src, test_src, train_tgt, test_tgt = train_test_split(
 	src_sentences, tgt_sentences, test_size=0.2, random_state=42)
 
@@ -79,9 +76,6 @@ trainX = encode_sequences(train_src, src_vocab, src_length)
 trainY = encode_sequences(train_tgt, tgt_vocab, tgt_length)
 testX = encode_sequences(test_src, src_vocab, src_length)
 testY = encode_sequences(test_tgt, tgt_vocab, tgt_length)
-
-
-# PyTorch Seq2Seq Model
 
 class Seq2Seq(nn.Module):
 	def __init__(self, src_vocab_size, tgt_vocab_size, src_length, tgt_length, embed_size=128, hidden_size=256):
@@ -105,7 +99,6 @@ model = Seq2Seq(src_vocab_size, tgt_vocab_size, src_length, tgt_length).to(devic
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 criterion = nn.CrossEntropyLoss(ignore_index=0)
 
-# Prepare data for PyTorch
 def to_tensor(arr):
 	return torch.tensor(arr, dtype=torch.long)
 
@@ -114,8 +107,6 @@ trainY_tensor = to_tensor(trainY)
 testX_tensor = to_tensor(testX)
 testY_tensor = to_tensor(testY)
 
-
-# Training loop
 epochs = 30
 batch_size = 64
 train_losses = []
@@ -137,7 +128,6 @@ for epoch in range(epochs):
 	avg_loss = epoch_loss / (len(trainX_tensor) // batch_size + 1)
 	train_losses.append(avg_loss)
 
-	# Validation
 	model.eval()
 	with torch.no_grad():
 		val_loss = 0
@@ -154,7 +144,6 @@ for epoch in range(epochs):
 
 	print(f"Epoch {epoch+1}/{epochs} - Train Loss: {avg_loss:.4f} - Val Loss: {avg_val_loss:.4f}")
 
-# Save model and vocabs for inference
 torch.save(model.state_dict(), 'savepoints/model_seq2seq.pt')
 with open('savepoints/src_vocab.pkl', 'wb') as f:
 	pickle.dump(src_vocab, f)

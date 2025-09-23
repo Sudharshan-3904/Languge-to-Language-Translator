@@ -1,6 +1,3 @@
-
-
-# PyTorch inference for English-to-French translation
 import torch
 import torch.nn as nn
 import pickle
