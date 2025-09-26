@@ -23,7 +23,7 @@ def to_lines(text):
 	return sents
 
 
-MAX_PAIRS = 9000
+MAX_PAIRS = 100500
 data = read_text('bilingual_pairs/fra edit.txt')
 lines = to_lines(data)[:MAX_PAIRS]
 src_sentences = [line[0].lower() for line in lines if len(line) > 1]
@@ -32,9 +32,6 @@ min_len = min(len(src_sentences), len(tgt_sentences))
 src_sentences = src_sentences[:min_len]
 tgt_sentences = tgt_sentences[:min_len]
 
-# Tokenization
-
-# Simple tokenizer and vocab builder
 
 def build_vocab(sentences):
 	words = [word for sent in sentences for word in sent.split()]
@@ -106,7 +103,7 @@ trainY_tensor = to_tensor(trainY)
 testX_tensor = to_tensor(testX)
 testY_tensor = to_tensor(testY)
 
-epochs = 50
+epochs = 10
 batch_size = 128
 train_losses = []
 val_losses = []

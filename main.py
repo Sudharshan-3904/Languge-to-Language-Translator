@@ -65,5 +65,5 @@ if __name__ == "__main__":
     while True:
         input_sentence = input("Enter a sentence to translate: ")
         translation = predict_translation(input_sentence)
-        translation = (translation.split())[:len(input_sentence.split())]
-        print("Translation:", ' '.join(translation))
+        # translation = (translation.split())[:len(input_sentence.split())]
+        print("Translation:", ''.join(translation))
